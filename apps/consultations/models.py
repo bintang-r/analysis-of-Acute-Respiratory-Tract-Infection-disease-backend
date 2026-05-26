@@ -1,5 +1,8 @@
+# pyrefly: ignore [missing-import]
 from django.db import models
+# pyrefly: ignore [missing-import]
 from django.conf import settings
+# pyrefly: ignore [missing-import]
 from apps.symptoms.models import Symptom
 
 class Consultation(models.Model):
@@ -12,3 +15,12 @@ class ConsultationDetail(models.Model):
     consultation = models.ForeignKey(Consultation, on_delete=models.CASCADE, related_name='details')
     symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
     user_cf = models.FloatField()
+
+class Testimonial(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=5)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Testimonial by {self.user.username}"

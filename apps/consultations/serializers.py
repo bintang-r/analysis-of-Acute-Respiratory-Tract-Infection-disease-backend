@@ -1,5 +1,6 @@
+# pyrefly: ignore [missing-import]
 from rest_framework import serializers
-from .models import Consultation, ConsultationDetail
+from .models import Consultation, ConsultationDetail, Testimonial
 
 class ConsultationDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,6 +16,7 @@ class ConsultationSerializer(serializers.ModelSerializer):
         fields = ['id', 'consultation_date', 'final_diagnosis', 'confidence_result', 'details', 'diagnosis_results']
 
     def create(self, validated_data):
+        # pyrefly: ignore [missing-import]
         from apps.rules.services import DiagnosisService
         details_data = validated_data.pop('details', [])
         user = self.context['request'].user
@@ -38,3 +40,10 @@ class ConsultationSerializer(serializers.ModelSerializer):
         # Dynamically append diagnosis_results to the returned representation
         consultation.diagnosis_results = results
         return consultation
+
+class TestimonialSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.full_name', read_only=True)
+    
+    class Meta:
+        model = Testimonial
+        fields = ['id', 'user_name', 'rating', 'content', 'created_at']

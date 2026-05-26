@@ -1,4 +1,6 @@
+# pyrefly: ignore [missing-import]
 from apps.rules.models import Rule, CertaintyFactor
+# pyrefly: ignore [missing-import]
 from apps.diseases.models import Disease
 
 class DiagnosisService:

@@ -1,5 +1,8 @@
+# pyrefly: ignore [missing-import]
 from django.db import models
+# pyrefly: ignore [missing-import]
 from apps.diseases.models import Disease
+# pyrefly: ignore [missing-import]
 from apps.symptoms.models import Symptom
 
 class Rule(models.Model):

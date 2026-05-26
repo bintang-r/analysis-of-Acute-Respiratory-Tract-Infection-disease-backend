@@ -1,0 +1,11 @@
+# Pyrefly configuration
+# Points Pyrefly to the venv Python interpreter so all packages
+# (django, rest_framework, etc.) are found correctly.
+
+[project]
+python_interpreter = "venv/Scripts/python.exe"
+
+# Suppress untyped-import warnings for third-party packages
+# that don't have stubs bundled (will use django-stubs & drf-stubs from venv)
+[errors]
+untyped-import = false
