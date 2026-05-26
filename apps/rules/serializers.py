@@ -1,6 +1,5 @@
-# pyrefly: ignore [missing-import]
 from rest_framework import serializers
-from .models import Rule, CertaintyFactor
+from .models import Rule, CertaintyFactor, DatasetRow
 
 class RuleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,4 +9,9 @@ class RuleSerializer(serializers.ModelSerializer):
 class CertaintyFactorSerializer(serializers.ModelSerializer):
     class Meta:
         model = CertaintyFactor
+        fields = '__all__'
+
+class DatasetRowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DatasetRow
         fields = '__all__'

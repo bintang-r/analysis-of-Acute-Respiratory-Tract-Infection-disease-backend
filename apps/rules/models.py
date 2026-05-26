@@ -26,3 +26,26 @@ class CertaintyFactor(models.Model):
 
     def __str__(self):
         return f"{self.disease.code} - {self.symptom.code} ({self.expert_cf})"
+
+class DatasetRow(models.Model):
+    age = models.IntegerField()
+    batuk_kering = models.IntegerField(default=0)
+    batuk_berdahak = models.IntegerField(default=0)
+    demam = models.IntegerField(default=0)
+    pilek = models.IntegerField(default=0)
+    hidung_tersumbat = models.IntegerField(default=0)
+    sesak_napas = models.IntegerField(default=0)
+    nyeri_tenggorokan = models.IntegerField(default=0)
+    sakit_kepala = models.IntegerField(default=0)
+    mual_muntah = models.IntegerField(default=0)
+    nyeri_dada = models.IntegerField(default=0)
+    suara_serak = models.IntegerField(default=0)
+    kelelahan = models.IntegerField(default=0)
+    berkeringat_malam = models.IntegerField(default=0)
+    nafsu_makan_turun = models.IntegerField(default=0)
+    hilang_penciuman = models.IntegerField(default=0)
+    nyeri_saat_menelan = models.IntegerField(default=0)
+    diagnosis = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"Row {self.id} - {self.diagnosis}"

@@ -10,6 +10,7 @@ class Consultation(models.Model):
     consultation_date = models.DateTimeField(auto_now_add=True)
     final_diagnosis = models.CharField(max_length=255, blank=True, null=True)
     confidence_result = models.FloatField(blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
 
 class ConsultationDetail(models.Model):
     consultation = models.ForeignKey(Consultation, on_delete=models.CASCADE, related_name='details')
@@ -24,3 +25,13 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"Testimonial by {self.user.username}"
+
+class Message(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='received_messages', null=True, blank=True)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"From {self.sender.username} at {self.timestamp}"
